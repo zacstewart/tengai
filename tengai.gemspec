@@ -10,5 +10,15 @@ Gem::Specification.new do |s|
   s.authors     = ['Zac Stewart']
   s.email       = ['zgstewart@gmail.com']
 
-  s.files       = `git ls-files`
+  s.require_paths = ['lib']
+
+  s.files = %w(
+    Gemfile
+    Gemfile.lock
+    lib/tengai.rb
+    lib/tengai/body.rb
+    lib/tengai/client.rb
+    lib/tengai/version.rb
+    tengai.gemspec
+  )
 end
