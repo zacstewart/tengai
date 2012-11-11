@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift 'lib'
-require File.expand_path('tengai/version', __FILE__)
+require 'tengai/version'
 
 Gem::Specification.new do |s|
   s.name        = 'tengai'
