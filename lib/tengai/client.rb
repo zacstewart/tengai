@@ -4,7 +4,7 @@ module Tengai
   class Client
     HOST = 'horizons.jpl.nasa.gov'.freeze
     PORT = '6775'.freeze
-    PROMPT = 'Horizons>'.freeze
+    PROMPT = /Horizons>/.freeze
 
     def initialize(telnet=Net::Telnet)
       @telnet = telnet
