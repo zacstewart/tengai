@@ -1,14 +1,20 @@
 PATH
   remote: .
   specs:
-    Tengai (0.0.1)
+    tengai (0.0.1)
 
 GEM
   remote: http://rubygems.org/
   specs:
+    metaclass (0.0.1)
+    mocha (0.13.1)
+      metaclass (~> 0.0.1)
+    rake (10.0.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  Tengai!
+  mocha
+  rake
+  tengai!

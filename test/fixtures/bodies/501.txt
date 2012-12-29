@@ -1,0 +1,13 @@
+*******************************************************************************
+ Revised: Jan 08, 2004             Io  / (Jupiter)                          501
+
+ SATELLITE PHYSICAL PROPERTIES:
+  Radius (km)             = 1821.3 +- 0.2   Density (g cm^-3)   =  3.530 +-.006
+  Mass (10^20 kg )        =  893.3 +- 1.5   Geometric Albedo    =  0.6  
+
+ SATELLITE ORBITAL DATA:
+  Semi-major axis, a (km) = 421.769 (10^3)  Orbital period      = 1.769138 d
+  Eccentricity, e         = 0.0041          Rotational period   = Synchronous
+  Inclination, i  (deg)   = 0.036
+*******************************************************************************
+ Select ... [E]phemeris, [F]tp, [M]ail, [R]edisplay, ?, <cr>: 
