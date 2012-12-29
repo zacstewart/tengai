@@ -5,6 +5,7 @@ require 'logger'
 require 'tengai/version'
 require 'tengai/client'
 require 'tengai/body'
+require 'tengai/ephemeris'
 
 module Tengai
   class << self
