@@ -1,6 +1,7 @@
 # Tengai
 
 [![Build Status](https://travis-ci.org/zacstewart/tengai.png?branch=master)](https://travis-ci.org/zacstewart/tengai)
+[![Dependency Status](https://gemnasium.com/zacstewart/tengai.png)](https://gemnasium.com/zacstewart/tengai)
 
 _Tengai_ is a Gem for using the [JPL HORIZONS System][1].
 
