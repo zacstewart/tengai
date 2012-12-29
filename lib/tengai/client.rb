@@ -27,8 +27,8 @@ module Tengai
       @connection
     end
 
-    def cmd(*args)
-      connection.cmd(*args)
+    def cmd(*args, &blk)
+      connection.cmd(*args, &blk)
     end
   end
 end
