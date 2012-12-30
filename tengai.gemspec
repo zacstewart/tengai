@@ -17,20 +17,27 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov'
 
   s.files = %w(
+    .gitignore
+    .travis.yml
     Gemfile
-    Gemfile.lock
+    README.md
     Rakefile
     lib/tengai.rb
     lib/tengai/body.rb
     lib/tengai/client.rb
+    lib/tengai/ephemeris.rb
+    lib/tengai/requests/ephemeris_request.rb
     lib/tengai/version.rb
     tengai.gemspec
     test/fixtures/bodies/10.txt
     test/fixtures/bodies/399.txt
     test/fixtures/bodies/499.txt
     test/fixtures/bodies/501.txt
+    test/fixtures/ephemerides/mars_observed_by_earth_from_2012_12_28_to_29.txt
     test/fixtures/major_bodies.txt
+    test/integration/body_integration_test.rb
     test/test_helper.rb
-    test/units/body_test.rb
+    test/unit/body_test.rb
+    test/unit/ephemeris_test.rb
   )
 end
