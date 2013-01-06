@@ -1812,7 +1812,7 @@ self.ephemeris_parser_en_main = 0;
 
     private
     def parse_time(time)
-      Date.parse(time.strip)
+      DateTime.parse(time.strip)
     end
   end
 end

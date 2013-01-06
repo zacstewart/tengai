@@ -76,7 +76,7 @@ module Tengai
 
     private
     def parse_time(time)
-      Date.parse(time.strip)
+      DateTime.parse(time.strip)
     end
   end
 end
