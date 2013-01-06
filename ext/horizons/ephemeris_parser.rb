@@ -12,7 +12,7 @@ module Tengai
   class EphemerisParser < EPHEMERIS_DATA
     def self.parse(data)
       parser = new
-      data = data.unpack("c*") if(data.is_a?(String))
+      data = data.unpack('c*') if data.is_a? String
       eof = data.length
 
       
