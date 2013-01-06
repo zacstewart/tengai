@@ -1,4 +1,5 @@
 $LOAD_PATH.unshift 'lib'
+$LOAD_PATH.unshift 'ext'
 require 'tengai/version'
 
 Gem::Specification.new do |s|
