@@ -64,6 +64,19 @@ module Tengai
       parser
     end
 
+    def start_time=(time)
+      super parse_time(time)
+    end
+
+    def stop_time=(time)
+      super parse_time(time)
+    end
+
     %% write data;
+
+    private
+    def parse_time(time)
+      Date.parse(time.strip)
+    end
   end
 end

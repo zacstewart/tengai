@@ -6,6 +6,8 @@
 
 =end
 
+require 'date'
+
 module Tengai
   EPHEMERIS_DATA = Struct.new(:start_time, :stop_time, :ephemeris).freeze
 
@@ -16,16 +18,16 @@ module Tengai
       eof = data.length
 
       
-# line 20 "ext/horizons/ephemeris_parser.rb"
+# line 22 "ext/horizons/ephemeris_parser.rb"
 begin
 	p ||= 0
 	pe ||= data.length
 	cs = ephemeris_parser_start
 end
 
-# line 60 "ext/horizons/ephemeris_parser.rl"
+# line 62 "ext/horizons/ephemeris_parser.rl"
       
-# line 29 "ext/horizons/ephemeris_parser.rb"
+# line 31 "ext/horizons/ephemeris_parser.rb"
 begin
 	_klen, _trans, _keys, _acts, _nacts = nil
 	_goto_level = 0
@@ -127,7 +129,7 @@ when 4 then
 
     parser.ephemeris = data[my_ts..p].pack('c*')
   		end
-# line 131 "ext/horizons/ephemeris_parser.rb"
+# line 133 "ext/horizons/ephemeris_parser.rb"
 			end # action switch
 		end
 	end
@@ -150,13 +152,21 @@ when 4 then
 	end
 	end
 
-# line 61 "ext/horizons/ephemeris_parser.rl"
+# line 63 "ext/horizons/ephemeris_parser.rl"
 
       parser
     end
 
+    def start_time=(time)
+      super parse_time(time)
+    end
+
+    def stop_time=(time)
+      super parse_time(time)
+    end
+
     
-# line 160 "ext/horizons/ephemeris_parser.rb"
+# line 170 "ext/horizons/ephemeris_parser.rb"
 class << self
 	attr_accessor :_ephemeris_parser_actions
 	private :_ephemeris_parser_actions, :_ephemeris_parser_actions=
@@ -1798,6 +1808,11 @@ end
 self.ephemeris_parser_en_main = 0;
 
 
-# line 66 "ext/horizons/ephemeris_parser.rl"
+# line 76 "ext/horizons/ephemeris_parser.rl"
+
+    private
+    def parse_time(time)
+      Date.parse(time.strip)
+    end
   end
 end
