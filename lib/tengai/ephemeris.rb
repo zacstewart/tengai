@@ -5,7 +5,15 @@ module Tengai
     attr_reader :data
 
     def initialize(data)
-      @data = data
+      @data = EphemerisParser.parse(data)
+    end
+
+    def start_time
+      @data.start_time
+    end
+
+    def stop_time
+      @data.stop_time
     end
 
     # Public: fetch an ephemeris table for a given body using the client
