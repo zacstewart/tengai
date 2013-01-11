@@ -21,10 +21,13 @@ Gem::Specification.new do |s|
 
   s.files = %w(
     .gitignore
+    .rvrc
     .travis.yml
     Gemfile
     README.md
     Rakefile
+    ext/horizons/ephemeris_parser.rb
+    ext/horizons/ephemeris_parser.rl
     lib/tengai.rb
     lib/tengai/body.rb
     lib/tengai/client.rb
@@ -39,8 +42,10 @@ Gem::Specification.new do |s|
     test/fixtures/ephemerides/mars_observed_by_earth_from_2012_12_28_to_29.txt
     test/fixtures/major_bodies.txt
     test/integration/body_integration_test.rb
+    test/integration/ephemeris_integration_test.rb
     test/test_helper.rb
     test/unit/body_test.rb
+    test/unit/ephemeris_parser_test.rb
     test/unit/ephemeris_test.rb
   )
 end
