@@ -25,7 +25,7 @@ module Tengai
       @client = client
       @body = body.to_s
       @start_time = options[:start_time]
-      @end_time = options[:end_time]
+      @stop_time = options[:stop_time]
       @state = :ready
     end
 
@@ -65,7 +65,7 @@ module Tengai
       when START_TIME_PROMPT
         send_command(@start_time.strftime(TIME_FORMAT))
       when END_TIME_PROMPT
-        send_command(@end_time.strftime(TIME_FORMAT))
+        send_command(@stop_time.strftime(TIME_FORMAT))
       when INTERVAL_PROMPT
         send_command('1d')
       when ACCEPT_DEFAULT_OUTPUT_PROMPT
