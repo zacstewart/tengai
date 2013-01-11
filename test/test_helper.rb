@@ -5,6 +5,8 @@ SimpleCov.start do
 end
 require 'test/unit'
 require 'mocha/setup'
+require 'forgery'
+require 'pry'
 
 require 'tengai'
 
