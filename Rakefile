@@ -2,10 +2,34 @@ STDOUT.sync = true
 require 'rake/testtask'
 
 task default: :test
-Rake::TestTask.new do |t|
-  t.libs << 'test'
-  t.test_files = FileList['test/**/*_test.rb']
-  t.verbose = true
+
+desc 'Run all tests'
+task :test do
+  Rake::Task['test:units'].invoke
+  Rake::Task['test:integration'].invoke
+end
+
+namespace :test do
+  desc 'Run all tests together (for coverage)'
+  Rake::TestTask.new(:all) do |t|
+    t.libs << 'test'
+    t.test_files = FileList['test/**/*_test.rb']
+    t.verbose = true
+  end
+
+  desc 'Run unit tests'
+  Rake::TestTask.new(:units) do |t|
+    t.libs << 'test'
+    t.test_files = FileList['test/unit/**/*_test.rb']
+    t.verbose = true
+  end
+
+  desc 'Run integration tests'
+  Rake::TestTask.new(:integration) do |t|
+    t.libs << 'test'
+    t.test_files = FileList['test/integration/**/*_test.rb']
+    t.verbose = true
+  end
 end
 
 namespace :ragel do
