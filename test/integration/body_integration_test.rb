@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BodyIntegratoinTest < Test::Unit::TestCase
+class BodyIntegrationTest < Test::Unit::TestCase
   def setup
     @client = Client.new
   end
