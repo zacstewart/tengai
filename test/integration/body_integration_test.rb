@@ -18,4 +18,8 @@ class BodyIntegrationTest < Test::Unit::TestCase
     assert_equal 'Earth', body.name
     assert_equal Body.new(Fixtures.earth), body
   end
+
+  def teardown
+    @client.disconnect
+  end
 end
