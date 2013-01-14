@@ -5,6 +5,13 @@
 
 _Tengai_ is a Gem for using the [JPL HORIZONS System][1].
 
+> The JPL HORIZONS on-line solar system data and ephemeris computation
+> service provides access to key solar system data and flexible
+> production of highly accurate ephemerides for solar system objects
+> (603428 asteroids, 3184 comets, 176 planetary satellites, 8 planets,
+> the Sun, L1, L2, select spacecraft, and system barycenters ). HORIZONS
+> is provided by the Solar System Dynamics Group of the Jet Propulsion Laboratory.
+
 [1]: http://ssd.jpl.nasa.gov/?horizons
 
 ## Contributing :octocat:
