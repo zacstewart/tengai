@@ -46,6 +46,6 @@ namespace :ragel do
   task :clean do
     target = 'ephemeris_parser'
     puts "Removing #{target}"
-    File.unlink "ext/horizons/#{target}.rb"
+    File.unlink "ext/horizons/#{target}.rb" if File.exists? "ext/horizons/#{target}.rb"
   end
 end
