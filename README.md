@@ -25,6 +25,10 @@ ephemeris = Tengai::Ephemeris.fetch(client, body,
 
 ## Contributing :octocat:
 
+The project uses [Ragel State Machine Compiler][2] to generate the parser code.  If
+you will be working on that, you'll need to install Ragel (`brew install
+ragel`).
+
 1. Fork
 2. Create a feature branch
 3. Add your feature and test it
@@ -33,3 +37,4 @@ ephemeris = Tengai::Ephemeris.fetch(client, body,
 6. Create a pull request
 
 [1]: http://ssd.jpl.nasa.gov/?horizons
+[2]: http://www.complang.org/ragel/
