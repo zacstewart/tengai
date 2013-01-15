@@ -12,8 +12,6 @@ _Tengai_ is a Gem for using the [JPL HORIZONS System][1].
 > system barycenters ). HORIZONS is provided by the Solar System Dynamics Group
 > of the Jet Propulsion Laboratory.
 
-[1]: http://ssd.jpl.nasa.gov/?horizons
-
 ## Contributing :octocat:
 
 1. Fork
@@ -22,3 +20,5 @@ _Tengai_ is a Gem for using the [JPL HORIZONS System][1].
 4. Commit
 5. Push your branch
 6. Create a pull request
+
+[1]: http://ssd.jpl.nasa.gov/?horizons
