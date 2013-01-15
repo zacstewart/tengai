@@ -16,6 +16,14 @@ module Tengai
       @data.stop_time
     end
 
+    def step_size
+      @data.ephemeris_table
+    end
+
+    def ephemeris_table
+      @data.ephemeris_table
+    end
+
     # Public: fetch an ephemeris table for a given body using the client
     #
     # client - Tengai::Client
