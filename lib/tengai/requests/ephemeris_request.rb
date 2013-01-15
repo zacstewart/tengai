@@ -61,7 +61,7 @@ module Tengai
       when FIRST_OBSERVER_PROMPT
         send_command('geo')
       when SUBSEQUENT_OBSERVER_PROMPT
-        send_command('y')
+        send_command('n')
       when START_TIME_PROMPT
         send_command(@start_time.strftime(TIME_FORMAT))
       when END_TIME_PROMPT
