@@ -36,5 +36,10 @@ ragel`).
 5. Push your branch
 6. Create a pull request
 
+## Testing :ok_hand:
+_Tengai_ is tested with Test::Unit. Tests are split unto units and integration.
+Run them with `rake test:units` and `rake test:integration` respectively or
+just `rake` to run them all.
+
 [1]: http://ssd.jpl.nasa.gov/?horizons
 [2]: http://www.complang.org/ragel/
