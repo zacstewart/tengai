@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/zacstewart/tengai.png?branch=master)](https://travis-ci.org/zacstewart/tengai)
 [![Dependency Status](https://gemnasium.com/zacstewart/tengai.png)](https://gemnasium.com/zacstewart/tengai)
 
-_Tengai_ is a Gem for using the [JPL HORIZONS System][1].
+_Tengai_ is a Gem for using the [NASA JPL HORIZONS System][1].
 
 > The JPL HORIZONS on-line solar system data and ephemeris computation service
 > provides access to key solar system data and flexible production of highly
