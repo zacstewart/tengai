@@ -5,6 +5,10 @@ class EphemerisParserTest < Test::Unit::TestCase
     @parser = EphemerisParser.parse(Fixtures.ephemeris)
   end
 
+  def test_target_body_id
+    assert_equal 499, @parser.target_body_id
+  end
+
   def test_start_time
     assert_equal DateTime.parse('2012-12-28T00:01:00+00:00'), @parser.start_time
   end

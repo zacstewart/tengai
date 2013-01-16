@@ -3,7 +3,7 @@ require 'test_helper'
 class EphemerisIntegrationTest < Test::Unit::TestCase
   def setup
     @client = Client.new
-    mars = Body.find(@client, 499)
+    @mars = Body.find(@client, 499)
 
     # Limit delta, otherwise the system can take a long time to generate an
     # ephemeris.
@@ -11,7 +11,11 @@ class EphemerisIntegrationTest < Test::Unit::TestCase
     @stop_time = @start_time + 1 + rand(2)
 
     @ephemeris = Ephemeris.fetch(
-      @client, mars, start_time: @start_time, stop_time: @stop_time)
+      @client, @mars, start_time: @start_time, stop_time: @stop_time)
+  end
+
+  def test_target_body_id
+    assert_equal @mars, @ephemeris.target_body
   end
 
   def test_start_time

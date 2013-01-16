@@ -4,8 +4,13 @@ module Tengai
   class Ephemeris
     attr_reader :data
 
-    def initialize(data)
+    def initialize(client, data)
+      @client = client
       @data = EphemerisParser.parse(data)
+    end
+
+    def target_body
+      @target_body ||= Tengai::Body.find(@client, @data.target_body_id)
     end
 
     def start_time
@@ -38,7 +43,7 @@ module Tengai
       request = EphemerisRequest.new(
         client, body.id, start_time: start_time, stop_time: stop_time)
 
-      new(request.fetch.data)
+      new(client, request.fetch.data)
     end
   end
 end

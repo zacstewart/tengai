@@ -10,12 +10,15 @@ class EphemerisTest < Test::Unit::TestCase
   end
 
   def test_fetch_should_get_data_from_an_ephemeris_request
+    Tengai::Body.stubs(:find).returns(@body)
+
     @ephemeris_request = mock
     @ephemeris_request.expects(:fetch).returns(@ephemeris_request)
     @ephemeris_request.expects(:data).returns(Fixtures.ephemeris)
     EphemerisRequest.stubs(:new).returns(@ephemeris_request)
 
     @ephemeris_parser = mock
+    @ephemeris_parser.expects(:target_body_id).returns(499)
     @ephemeris_parser.expects(:start_time).returns(DateTime.parse('2012-12-28T00:01:00+00:00'))
     @ephemeris_parser.expects(:stop_time).returns(DateTime.parse('2012-12-29T00:01:00+00:00'))
     @ephemeris_parser.expects(:ephemeris_table).returns(@mock_ephemeris_table)
@@ -26,5 +29,6 @@ class EphemerisTest < Test::Unit::TestCase
     assert_equal DateTime.parse('2012-12-28T00:01:00+00:00'), ephemeris.start_time
     assert_equal DateTime.parse('2012-12-29T00:01:00+00:00'), ephemeris.stop_time
     assert_equal @mock_ephemeris_table, ephemeris.ephemeris_table
+    assert_equal @body, ephemeris.target_body
   end
 end
