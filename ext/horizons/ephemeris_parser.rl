@@ -52,11 +52,11 @@
 
   target_body = 'Target body name:' space body_name space
     '(' body_id >mark @target_body_id ')'
-    ws* '{' any* '}' ws*;
+    ws* '{' any* '}' '\n';
 
   center_body = 'Center body name:' space body_name space
     '(' body_id >mark @center_body_id ')'
-    ws* '{' any* '}' ws*;
+    ws* '{' any* '}' '\n';
 
   start_time = 'Start time' ' '* ':' ' ' datetime >mark %parse_start_time space* '\n';
   stop_time  = 'Stop  time' ' '* ':' ' ' datetime >mark %parse_stop_time space* '\n';
