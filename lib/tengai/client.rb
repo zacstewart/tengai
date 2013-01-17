@@ -16,7 +16,7 @@ module Tengai
         'Host'   => HOST,
         'Port'   => PORT,
         'Prompt' => PROMPT)
-      @connection.waitfor 'Match' => Regexp.new(PROMPT)
+      @connection.waitfor 'Match' => PROMPT
     end
 
     def disconnect
