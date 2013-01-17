@@ -6,8 +6,11 @@
   action mark { mark = p }
 
   action target_body_id {
-    fhold;
     parser.target_body_id = data[mark..p].pack('c*')
+  }
+
+  action center_body_id {
+    parser.center_body_id = data[mark..p].pack('c*')
   }
 
   action parse_start_time {
@@ -48,7 +51,13 @@
   body_name = (alnum | space)*;
   body_id = digit*;
 
-  target_body = 'Target body name:' space body_name space '(' body_id >mark %target_body_id ')';
+  target_body = 'Target body name:' space body_name space
+    '(' body_id >mark @target_body_id ')'
+    ws* '{' any* '}' ws*;
+
+  center_body = 'Center body name:' space body_name space
+    '(' body_id >mark @center_body_id ')'
+    ws* '{' any* '}' ws*;
 
   start_time = 'Start time' ' '* ':' ' ' datetime >mark %parse_start_time space* '\n';
   stop_time  = 'Stop  time' ' '* ':' ' ' datetime >mark %parse_stop_time space* '\n';
@@ -59,6 +68,7 @@
   main := (
     any*
     target_body
+    center_body
     any*
     start_time
     stop_time
@@ -74,7 +84,7 @@
 require 'date'
 
 module Tengai
-  EPHEMERIS_DATA = Struct.new(:target_body_id, :start_time, :stop_time, :step_size, :ephemeris_table).freeze
+  EPHEMERIS_DATA = Struct.new(:target_body_id, :center_body_id, :start_time, :stop_time, :step_size, :ephemeris_table).freeze
 
   class EphemerisParser < EPHEMERIS_DATA
     def self.parse(data)
@@ -89,6 +99,10 @@ module Tengai
     end
 
     def target_body_id=(id)
+      super id.to_i
+    end
+
+    def center_body_id=(id)
       super id.to_i
     end
 

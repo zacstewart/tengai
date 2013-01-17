@@ -9,6 +9,10 @@ class EphemerisParserTest < Test::Unit::TestCase
     assert_equal 499, @parser.target_body_id
   end
 
+  def test_center_body_id
+    assert_equal 399, @parser.center_body_id
+  end
+
   def test_start_time
     assert_equal DateTime.parse('2012-12-28T00:01:00+00:00'), @parser.start_time
   end
