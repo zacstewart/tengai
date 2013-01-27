@@ -2,31 +2,17 @@ require 'tengai/requests/ephemeris_request'
 
 module Tengai
   class Ephemeris
-    attr_reader :data
+    attr_accessor :data, :target_body_id, :center_body_id, :start_time,
+      :stop_time, :step_size, :ephemeris_table
 
     def initialize(client, data)
       @client = client
-      @data = EphemerisParser.parse(data)
+      @data = data
+      parse!
     end
 
     def target_body
-      @target_body ||= Tengai::Body.find(@client, @data.target_body_id)
-    end
-
-    def start_time
-      @data.start_time
-    end
-
-    def stop_time
-      @data.stop_time
-    end
-
-    def step_size
-      @data.ephemeris_table
-    end
-
-    def ephemeris_table
-      @data.ephemeris_table
+      @target_body ||= Tengai::Body.find(@client, target_body_id)
     end
 
     # Public: fetch an ephemeris table for a given body using the client
@@ -44,6 +30,18 @@ module Tengai
         client, body.id, start_time: start_time, stop_time: stop_time)
 
       new(client, request.fetch.data)
+    end
+
+    private
+    def parse!
+      parsed_data = EphemerisParser.parse(@data)
+
+      self.target_body_id  = parsed_data.target_body_id
+      self.center_body_id  = parsed_data.center_body_id
+      self.start_time      = parsed_data.start_time
+      self.stop_time       = parsed_data.stop_time
+      self.step_size       = parsed_data.step_size
+      self.ephemeris_table = parsed_data.ephemeris_table
     end
   end
 end

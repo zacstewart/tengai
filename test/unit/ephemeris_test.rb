@@ -19,8 +19,10 @@ class EphemerisTest < Test::Unit::TestCase
 
     @ephemeris_parser = mock
     @ephemeris_parser.expects(:target_body_id).returns(499)
+    @ephemeris_parser.expects(:center_body_id).returns(399)
     @ephemeris_parser.expects(:start_time).returns(DateTime.parse('2012-12-28T00:01:00+00:00'))
     @ephemeris_parser.expects(:stop_time).returns(DateTime.parse('2012-12-29T00:01:00+00:00'))
+    @ephemeris_parser.expects(:step_size).returns('1440 minutes')
     @ephemeris_parser.expects(:ephemeris_table).returns(@mock_ephemeris_table)
     EphemerisParser.stubs(:parse).returns(@ephemeris_parser)
 

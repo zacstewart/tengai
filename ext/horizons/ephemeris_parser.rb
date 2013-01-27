@@ -7,9 +7,9 @@
 =end
 
 require 'date'
-
 module Tengai
-  EPHEMERIS_DATA = Struct.new(:target_body_id, :center_body_id, :start_time, :stop_time, :step_size, :ephemeris_table).freeze
+  EPHEMERIS_DATA = Struct.new(:target_body_id, :center_body_id, :start_time,
+                              :stop_time, :step_size, :ephemeris_table)
 
   class EphemerisParser < EPHEMERIS_DATA
     def self.parse(data)
@@ -18,16 +18,16 @@ module Tengai
       eof = data.length
 
       
-# line 22 "ext/horizons/ephemeris_parser.rb"
+# line 21 "ext/horizons/ephemeris_parser.rb"
 begin
 	p ||= 0
 	pe ||= data.length
 	cs = ephemeris_parser_start
 end
 
-# line 95 "ext/horizons/ephemeris_parser.rl"
+# line 94 "ext/horizons/ephemeris_parser.rl"
       
-# line 31 "ext/horizons/ephemeris_parser.rb"
+# line 30 "ext/horizons/ephemeris_parser.rb"
 begin
 	_klen, _trans, _keys, _acts, _nacts = nil
 	_goto_level = 0
@@ -112,39 +112,39 @@ when 1 then
 # line 8 "ext/horizons/ephemeris_parser.rl"
 		begin
 
-    parser.target_body_id = data[mark..p].pack('c*')
+    target_body_id = data[mark..p].pack('c*')
   		end
 when 2 then
 # line 12 "ext/horizons/ephemeris_parser.rl"
 		begin
 
-    parser.center_body_id = data[mark..p].pack('c*')
+    center_body_id = data[mark..p].pack('c*')
   		end
 when 3 then
 # line 16 "ext/horizons/ephemeris_parser.rl"
 		begin
 
-    parser.start_time = data[mark..p].pack('c*')
+    start_time = data[mark..p].pack('c*')
   		end
 when 4 then
 # line 20 "ext/horizons/ephemeris_parser.rl"
 		begin
 
-    parser.stop_time = data[mark..p].pack('c*')
+    stop_time = data[mark..p].pack('c*')
   		end
 when 5 then
 # line 24 "ext/horizons/ephemeris_parser.rl"
 		begin
 
-    parser.step_size = data[mark..p].pack('c*')
+    step_size = data[mark..p].pack('c*')
   		end
 when 6 then
 # line 28 "ext/horizons/ephemeris_parser.rl"
 		begin
 
-    parser.ephemeris_table = data[mark..p].pack('c*')
+    ephemeris_table = data[mark..p].pack('c*')
   		end
-# line 148 "ext/horizons/ephemeris_parser.rb"
+# line 147 "ext/horizons/ephemeris_parser.rb"
 			end # action switch
 		end
 	end
@@ -167,29 +167,20 @@ when 6 then
 	end
 	end
 
-# line 96 "ext/horizons/ephemeris_parser.rl"
+# line 95 "ext/horizons/ephemeris_parser.rl"
+
+      parser.target_body_id  = target_body_id.to_i
+      parser.center_body_id  = center_body_id.to_i
+      parser.start_time      = DateTime.parse(start_time)
+      parser.stop_time       = DateTime.parse(stop_time)
+      parser.step_size       = step_size
+      parser.ephemeris_table = ephemeris_table
 
       parser
     end
 
-    def target_body_id=(id)
-      super id.to_i
-    end
-
-    def center_body_id=(id)
-      super id.to_i
-    end
-
-    def start_time=(time)
-      super parse_time(time)
-    end
-
-    def stop_time=(time)
-      super parse_time(time)
-    end
-
     
-# line 193 "ext/horizons/ephemeris_parser.rb"
+# line 183 "ext/horizons/ephemeris_parser.rb"
 class << self
 	attr_accessor :_ephemeris_parser_actions
 	private :_ephemeris_parser_actions, :_ephemeris_parser_actions=
@@ -4166,13 +4157,6 @@ end
 self.ephemeris_parser_en_main = 0;
 
 
-# line 117 "ext/horizons/ephemeris_parser.rl"
-
-    # % fix syntax highlighting
-
-    private
-    def parse_time(time)
-      DateTime.parse(time)
-    end
+# line 107 "ext/horizons/ephemeris_parser.rl"
   end
 end

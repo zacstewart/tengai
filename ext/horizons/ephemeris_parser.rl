@@ -6,27 +6,27 @@
   action mark { mark = p }
 
   action target_body_id {
-    parser.target_body_id = data[mark..p].pack('c*')
+    target_body_id = data[mark..p].pack('c*')
   }
 
   action center_body_id {
-    parser.center_body_id = data[mark..p].pack('c*')
+    center_body_id = data[mark..p].pack('c*')
   }
 
   action parse_start_time {
-    parser.start_time = data[mark..p].pack('c*')
+    start_time = data[mark..p].pack('c*')
   }
 
   action parse_stop_time {
-    parser.stop_time = data[mark..p].pack('c*')
+    stop_time = data[mark..p].pack('c*')
   }
 
   action parse_step_size {
-    parser.step_size = data[mark..p].pack('c*')
+    step_size = data[mark..p].pack('c*')
   }
 
   action parse_ephemeris_table {
-    parser.ephemeris_table = data[mark..p].pack('c*')
+    ephemeris_table = data[mark..p].pack('c*')
   }
 
   ws = [ \t\r\n];
@@ -81,9 +81,9 @@
 =end
 
 require 'date'
-
 module Tengai
-  EPHEMERIS_DATA = Struct.new(:target_body_id, :center_body_id, :start_time, :stop_time, :step_size, :ephemeris_table).freeze
+  EPHEMERIS_DATA = Struct.new(:target_body_id, :center_body_id, :start_time,
+                              :stop_time, :step_size, :ephemeris_table)
 
   class EphemerisParser < EPHEMERIS_DATA
     def self.parse(data)
@@ -94,32 +94,16 @@ module Tengai
       %% write init;
       %% write exec;
 
+      parser.target_body_id  = target_body_id.to_i
+      parser.center_body_id  = center_body_id.to_i
+      parser.start_time      = DateTime.parse(start_time)
+      parser.stop_time       = DateTime.parse(stop_time)
+      parser.step_size       = step_size
+      parser.ephemeris_table = ephemeris_table
+
       parser
     end
 
-    def target_body_id=(id)
-      super id.to_i
-    end
-
-    def center_body_id=(id)
-      super id.to_i
-    end
-
-    def start_time=(time)
-      super parse_time(time)
-    end
-
-    def stop_time=(time)
-      super parse_time(time)
-    end
-
     %% write data;
-
-    # % fix syntax highlighting
-
-    private
-    def parse_time(time)
-      DateTime.parse(time)
-    end
   end
 end
