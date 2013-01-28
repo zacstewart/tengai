@@ -13,19 +13,19 @@
     center_body_id = data[mark..p].pack('c*')
   }
 
-  action parse_start_time {
+  action start_time {
     start_time = data[mark..p].pack('c*')
   }
 
-  action parse_stop_time {
+  action stop_time {
     stop_time = data[mark..p].pack('c*')
   }
 
-  action parse_step_size {
+  action step_size {
     step_size = data[mark..p].pack('c*')
   }
 
-  action parse_ephemeris_table {
+  action ephemeris_table {
     ephemeris_table = data[mark..p].pack('c*')
   }
 
@@ -58,11 +58,11 @@
     '(' body_id >mark @center_body_id ')'
     ws* '{' any* '}' '\n';
 
-  start_time = 'Start time' ' '* ':' ' ' datetime >mark %parse_start_time space* '\n';
-  stop_time  = 'Stop  time' ' '* ':' ' ' datetime >mark %parse_stop_time space* '\n';
-  step_size  = 'Step-size' ' '* ':' ' ' (digit+ ' '* time_unit) >mark $parse_step_size '\n';
+  start_time = 'Start time' ' '* ':' ' ' datetime >mark %start_time space* '\n';
+  stop_time  = 'Stop  time' ' '* ':' ' ' datetime >mark %stop_time space* '\n';
+  step_size  = 'Step-size' ' '* ':' ' ' (digit+ ' '* time_unit) >mark $step_size '\n';
 
-  ephemeris = soe ephemeris_table >mark @parse_ephemeris_table eoe;
+  ephemeris = soe ephemeris_table >mark @ephemeris_table eoe;
 
   main := (
     any*

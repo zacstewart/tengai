@@ -18,16 +18,16 @@ module Tengai
       eof = data.length
 
       
-# line 21 "ext/horizons/ephemeris_parser.rb"
+# line 22 "ext/horizons/ephemeris_parser.rb"
 begin
 	p ||= 0
 	pe ||= data.length
 	cs = ephemeris_parser_start
 end
 
-# line 94 "ext/horizons/ephemeris_parser.rl"
+# line 95 "ext/horizons/ephemeris_parser.rl"
       
-# line 30 "ext/horizons/ephemeris_parser.rb"
+# line 31 "ext/horizons/ephemeris_parser.rb"
 begin
 	_klen, _trans, _keys, _acts, _nacts = nil
 	_goto_level = 0
@@ -144,7 +144,7 @@ when 6 then
 
     ephemeris_table = data[mark..p].pack('c*')
   		end
-# line 147 "ext/horizons/ephemeris_parser.rb"
+# line 148 "ext/horizons/ephemeris_parser.rb"
 			end # action switch
 		end
 	end
@@ -167,7 +167,7 @@ when 6 then
 	end
 	end
 
-# line 95 "ext/horizons/ephemeris_parser.rl"
+# line 96 "ext/horizons/ephemeris_parser.rl"
 
       parser.target_body_id  = target_body_id.to_i
       parser.center_body_id  = center_body_id.to_i
@@ -180,7 +180,7 @@ when 6 then
     end
 
     
-# line 183 "ext/horizons/ephemeris_parser.rb"
+# line 184 "ext/horizons/ephemeris_parser.rb"
 class << self
 	attr_accessor :_ephemeris_parser_actions
 	private :_ephemeris_parser_actions, :_ephemeris_parser_actions=
@@ -4157,6 +4157,6 @@ end
 self.ephemeris_parser_en_main = 0;
 
 
-# line 107 "ext/horizons/ephemeris_parser.rl"
+# line 108 "ext/horizons/ephemeris_parser.rl"
   end
 end
