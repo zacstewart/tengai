@@ -2,17 +2,17 @@ module Tengai
   class EphemerisRequest
     attr_reader :state, :data
 
-    DEFAULT_PROMPT = /<cr>:\s*$/
-    TABLE_PROMPT = /Observe, Elements, Vectors  \[o,e,v,\?\] :\s*$/.freeze
-    FIRST_OBSERVER_PROMPT = /Coordinate center \[ <id>,coord,geo  \] :\s*$/.freeze
-    SUBSEQUENT_OBSERVER_PROMPT = /Use previous center  \[ cr=\(y\), n, \? \] :\s*$/.freeze
+    DEFAULT_PROMPT = %r{<cr>:\s*$}
+    TABLE_PROMPT = %r{Observe, Elements, Vectors  \[o,e,v,\?\] :\s*$}.freeze
+    FIRST_OBSERVER_PROMPT = %r{Coordinate center \[ <id>,coord,geo  \] :\s*$}.freeze
+    SUBSEQUENT_OBSERVER_PROMPT = %r{Use previous center  \[ cr=\(y\), n, \? \] :\s*$}.freeze
     OBSERVER_PROMPT = Regexp.union(FIRST_OBSERVER_PROMPT, SUBSEQUENT_OBSERVER_PROMPT).freeze
-    START_TIME_PROMPT = /Starting UT  \[>=   1900-Jan-04 00:01\] :\s*$/.freeze
-    END_TIME_PROMPT = /Ending   UT  \[<=   2100-Jan-02 23:58\] :\s*$/.freeze
-    INTERVAL_PROMPT = /Output interval \[ex: 10m, 1h, 1d, \? \] :\s*$/.freeze
-    ACCEPT_DEFAULT_OUTPUT_PROMPT = /Accept default output \[ cr=\(y\), n, \?\] :\s*$/.freeze
-    SELECT_QUANTITIES_PROMPT = /Select table quantities \[ <#,#\.\.>, \?\] :\s*$/.freeze
-    COMPLETED_PROMPT = />>> Select\.\.\. \[A\]gain, \[N\]ew-case, \[F\]tp, \[K\]ermit, \[M\]ail, \[R\]edisplay, \? :\s*$/.freeze
+    START_TIME_PROMPT = %r{Starting UT  \[>=   1900-Jan-04 00:01\] :\s*$}.freeze
+    END_TIME_PROMPT = %r{Ending   UT  \[<=   2100-Jan-02 23:58\] :\s*$}.freeze
+    INTERVAL_PROMPT = %r{Output interval \[ex: 10m, 1h, 1d, \? \] :\s*$}.freeze
+    ACCEPT_DEFAULT_OUTPUT_PROMPT = %r{Accept default output \[ cr=\(y\), n, \?\] :\s*$}.freeze
+    SELECT_QUANTITIES_PROMPT = %r{Select table quantities \[ <#,#\.\.>, \?\] :\s*$}.freeze
+    COMPLETED_PROMPT = %r{>>> Select\.\.\. \[A\]gain, \[N\]ew-case, \[F\]tp, \[K\]ermit, \[M\]ail, \[R\]edisplay, \? :\s*$}.freeze
 
     ANY_PROMPT = Regexp.union(
       DEFAULT_PROMPT, TABLE_PROMPT, OBSERVER_PROMPT, START_TIME_PROMPT,
