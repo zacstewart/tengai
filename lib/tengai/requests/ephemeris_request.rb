@@ -31,6 +31,10 @@ module Tengai
       @state = :ready
     end
 
+    def self.fetch(client, body, options={})
+      new(client, body, options).fetch
+    end
+
     # Public: initiates the ephemeris request
     #
     # Examples:
