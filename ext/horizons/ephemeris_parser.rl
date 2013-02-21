@@ -38,7 +38,7 @@
   hours =  digit{2};
   minutes = digit{2};
   seconds = digit{2} '.' digit{4};
-  tz = 'UT';
+  tz = ('C'|'U') 'T';
   datetime = adbc ' ' year '-' month '-' date ' ' hours ':' minutes ':' seconds ' ' tz;
 
   time_unit = ('minute' [s]? | 'calendar year' [s]?);
