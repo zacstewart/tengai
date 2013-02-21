@@ -82,26 +82,20 @@
 
 require 'date'
 module Tengai
-  EPHEMERIS_DATA = Struct.new(:target_body_id, :center_body_id, :start_time,
-                              :stop_time, :step_size, :ephemeris_table)
-
-  class EphemerisParser < EPHEMERIS_DATA
-    def self.parse(data)
-      parser = new
+  class EphemerisParser
+    def self.parse(data, delegate)
       data = data.unpack('c*') if data.is_a? String
       eof = data.length
 
       %% write init;
       %% write exec;
 
-      parser.target_body_id  = target_body_id.to_i
-      parser.center_body_id  = center_body_id.to_i
-      parser.start_time      = DateTime.parse(start_time)
-      parser.stop_time       = DateTime.parse(stop_time)
-      parser.step_size       = step_size
-      parser.ephemeris_table = ephemeris_table
-
-      parser
+      delegate.target_body_id  = target_body_id.to_i
+      delegate.center_body_id  = center_body_id.to_i
+      delegate.start_time      = DateTime.parse(start_time)
+      delegate.stop_time       = DateTime.parse(stop_time)
+      delegate.step_size       = step_size
+      delegate.ephemeris_table = ephemeris_table
     end
 
     %% write data;

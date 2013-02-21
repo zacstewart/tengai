@@ -34,14 +34,7 @@ module Tengai
 
     private
     def parse!
-      parsed_data = EphemerisParser.parse(@data)
-
-      self.target_body_id  = parsed_data.target_body_id
-      self.center_body_id  = parsed_data.center_body_id
-      self.start_time      = parsed_data.start_time
-      self.stop_time       = parsed_data.stop_time
-      self.step_size       = parsed_data.step_size
-      self.ephemeris_table = parsed_data.ephemeris_table
+      EphemerisParser.parse(@data, self)
     end
   end
 end

@@ -17,20 +17,7 @@ class EphemerisTest < Test::Unit::TestCase
     @ephemeris_request.expects(:data).returns(Fixtures.ephemeris)
     EphemerisRequest.stubs(:new).returns(@ephemeris_request)
 
-    @ephemeris_parser = mock
-    @ephemeris_parser.expects(:target_body_id).returns(499)
-    @ephemeris_parser.expects(:center_body_id).returns(399)
-    @ephemeris_parser.expects(:start_time).returns(DateTime.parse('2012-12-28T00:01:00+00:00'))
-    @ephemeris_parser.expects(:stop_time).returns(DateTime.parse('2012-12-29T00:01:00+00:00'))
-    @ephemeris_parser.expects(:step_size).returns('1440 minutes')
-    @ephemeris_parser.expects(:ephemeris_table).returns(@mock_ephemeris_table)
-    EphemerisParser.stubs(:parse).returns(@ephemeris_parser)
-
-    ephemeris = Ephemeris.fetch(mock, @body)
-
-    assert_equal DateTime.parse('2012-12-28T00:01:00+00:00'), ephemeris.start_time
-    assert_equal DateTime.parse('2012-12-29T00:01:00+00:00'), ephemeris.stop_time
-    assert_equal @mock_ephemeris_table, ephemeris.ephemeris_table
-    assert_equal @body, ephemeris.target_body
+    EphemerisParser.expects(:parse)
+    Ephemeris.fetch(mock, @body)
   end
 end

@@ -8,26 +8,22 @@
 
 require 'date'
 module Tengai
-  EPHEMERIS_DATA = Struct.new(:target_body_id, :center_body_id, :start_time,
-                              :stop_time, :step_size, :ephemeris_table)
-
-  class EphemerisParser < EPHEMERIS_DATA
-    def self.parse(data)
-      parser = new
+  class EphemerisParser
+    def self.parse(data, delegate)
       data = data.unpack('c*') if data.is_a? String
       eof = data.length
 
       
-# line 22 "ext/horizons/ephemeris_parser.rb"
+# line 18 "ext/horizons/ephemeris_parser.rb"
 begin
 	p ||= 0
 	pe ||= data.length
 	cs = ephemeris_parser_start
 end
 
-# line 95 "ext/horizons/ephemeris_parser.rl"
+# line 91 "ext/horizons/ephemeris_parser.rl"
       
-# line 31 "ext/horizons/ephemeris_parser.rb"
+# line 27 "ext/horizons/ephemeris_parser.rb"
 begin
 	_klen, _trans, _keys, _acts, _nacts = nil
 	_goto_level = 0
@@ -144,7 +140,7 @@ when 6 then
 
     ephemeris_table = data[mark..p].pack('c*')
   		end
-# line 148 "ext/horizons/ephemeris_parser.rb"
+# line 144 "ext/horizons/ephemeris_parser.rb"
 			end # action switch
 		end
 	end
@@ -167,20 +163,18 @@ when 6 then
 	end
 	end
 
-# line 96 "ext/horizons/ephemeris_parser.rl"
+# line 92 "ext/horizons/ephemeris_parser.rl"
 
-      parser.target_body_id  = target_body_id.to_i
-      parser.center_body_id  = center_body_id.to_i
-      parser.start_time      = DateTime.parse(start_time)
-      parser.stop_time       = DateTime.parse(stop_time)
-      parser.step_size       = step_size
-      parser.ephemeris_table = ephemeris_table
-
-      parser
+      delegate.target_body_id  = target_body_id.to_i
+      delegate.center_body_id  = center_body_id.to_i
+      delegate.start_time      = DateTime.parse(start_time)
+      delegate.stop_time       = DateTime.parse(stop_time)
+      delegate.step_size       = step_size
+      delegate.ephemeris_table = ephemeris_table
     end
 
     
-# line 184 "ext/horizons/ephemeris_parser.rb"
+# line 178 "ext/horizons/ephemeris_parser.rb"
 class << self
 	attr_accessor :_ephemeris_parser_actions
 	private :_ephemeris_parser_actions, :_ephemeris_parser_actions=
@@ -4159,6 +4153,6 @@ end
 self.ephemeris_parser_en_main = 0;
 
 
-# line 108 "ext/horizons/ephemeris_parser.rl"
+# line 102 "ext/horizons/ephemeris_parser.rl"
   end
 end
