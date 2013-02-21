@@ -13,8 +13,7 @@ class EphemerisTest < Test::Unit::TestCase
     Tengai::Body.stubs(:find).returns(@body)
 
     @ephemeris_request = mock
-    @ephemeris_request.expects(:fetch).returns(@ephemeris_request)
-    @ephemeris_request.expects(:data).returns(Fixtures.ephemeris)
+    @ephemeris_request.expects(:fetch).returns(Fixtures.ephemeris)
     EphemerisRequest.stubs(:new).returns(@ephemeris_request)
 
     EphemerisParser.expects(:parse)

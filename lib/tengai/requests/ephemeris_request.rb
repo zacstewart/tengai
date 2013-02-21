@@ -1,7 +1,5 @@
 module Tengai
   class EphemerisRequest
-    attr_reader :state, :data
-
     DEFAULT_PROMPT = %r{<cr>:\s*$}
     TABLE_PROMPT = %r{Observe, Elements, Vectors  \[o,e,v,\?\] :\s*$}.freeze
     FIRST_OBSERVER_PROMPT = %r{Coordinate center \[ <id>,coord,geo  \] :\s*$}.freeze
@@ -42,10 +40,10 @@ module Tengai
     #
     # Returns the the request (self)
     def fetch
-      raise "Not ready" unless state == :ready
+      raise "Not ready" unless @state == :ready
       @state = :fetching
       send_command(@body)
-      self
+      @data
     end
 
     private

@@ -29,7 +29,7 @@ module Tengai
       request = EphemerisRequest.new(
         client, body.id, start_time: start_time, stop_time: stop_time)
 
-      new(client, request.fetch.data)
+      new(client, request.fetch)
     end
 
     private
