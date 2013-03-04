@@ -64,9 +64,8 @@
   stop_time  = 'Stop  time' ' '* ':' ' ' datetime >mark %stop_time space* '\n';
   step_size  = 'Step-size' ' '* ':' ' ' (digit+ ' '* time_unit) >mark $step_size '\n';
 
-  ephemeris_columns = (
-    ('JDCT' | 'Date__(UT)__HR:MN')
-    (' ' | alpha | ',')*) >mark @ephemeris_columns '\n';
+  ephemeris_columns = ('JDCT' (' ' | alpha | ',')*)
+  >mark @ephemeris_columns :> '\n';
 
   soe = '$$SOE' '\n';
   eoe = '$$EOE' '\n';
