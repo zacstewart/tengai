@@ -11,6 +11,12 @@ module Tengai
     END_TIME_PROMPT = %r{Ending \s* (C|U)T .* :\s*$}.freeze
     INTERVAL_PROMPT = %r{Output interval \[ex: 10m, 1h, 1d, \? \] :\s*$}.freeze
     ACCEPT_DEFAULT_OUTPUT_PROMPT = %r{Accept default output \[ cr=\(y\), n, \?\] :\s*$}.freeze
+    OUTPUT_REFERENCE_FRAME_PROMPT = %r{Output reference frame \[J2000, B1950\] :\s*$}.freeze
+    CORRECTIONS_PROMPT = %r{Corrections \[ 1=NONE, 2=LT, 3=LT\+S \]  :\s*$}.freeze
+    OUTPUT_UNITS = %r{Output units \[1=KM-S, 2=AU-D, 3=KM-D\] :\s*$}.freeze
+    CSV_FORMAT_PROMPT = %r{Spreadsheet CSV format    \[ YES, NO \] :\s*$}.freeze
+    LABEL_CARTESIAN_OUTPUT_PROMPT = %r{Label cartesian output    \[ YES, NO \] :\s*$}.freeze
+    SELECT_OUTPUT_TABLE_TYPE_PROMPT = %r{Select output table type  \[ 1-6, \?  \] :\s*$}.freeze
     SELECT_QUANTITIES_PROMPT = %r{Select table quantities \[ <#,#\.\.>, \?\] :\s*$}.freeze
     COMPLETED_PROMPT = %r{>>> Select\.\.\. \[A\]gain, \[N\]ew-case, \[F\]tp, \[K\]ermit, \[M\]ail, \[R\]edisplay, \? :\s*$}.freeze
 
@@ -18,7 +24,9 @@ module Tengai
       DEFAULT_PROMPT, TABLE_PROMPT, OBSERVER_PROMPT, CONFIRM_OBSERVER_PROMPT,
       REFERNCE_PLANE_PROMPT, START_TIME_PROMPT, END_TIME_PROMPT, INTERVAL_PROMPT,
       ACCEPT_DEFAULT_OUTPUT_PROMPT, SELECT_QUANTITIES_PROMPT, COMPLETED_PROMPT,
-      Client::PROMPT).freeze
+      OUTPUT_REFERENCE_FRAME_PROMPT, CORRECTIONS_PROMPT, OUTPUT_UNITS,
+      CSV_FORMAT_PROMPT, LABEL_CARTESIAN_OUTPUT_PROMPT,
+      SELECT_OUTPUT_TABLE_TYPE_PROMPT, Client::PROMPT).freeze
 
     TIME_FORMAT = '%Y-%b-%d %H:%M'.freeze
 
@@ -93,7 +101,19 @@ module Tengai
       when INTERVAL_PROMPT
         send_command '1d'
       when ACCEPT_DEFAULT_OUTPUT_PROMPT
-        send_command 'y'
+        send_command 'n'
+      when OUTPUT_REFERENCE_FRAME_PROMPT
+        send_command 'J2000'
+      when CORRECTIONS_PROMPT
+        send_command '1'
+      when OUTPUT_UNITS
+        send_command '2'
+      when CSV_FORMAT_PROMPT
+        send_command 'YES'
+      when LABEL_CARTESIAN_OUTPUT_PROMPT
+        send_command 'YES'
+      when SELECT_OUTPUT_TABLE_TYPE_PROMPT
+        send_command '03'
       when SELECT_QUANTITIES_PROMPT
         send_command 'B'
       when COMPLETED_PROMPT
