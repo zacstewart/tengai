@@ -1,4 +1,5 @@
 require 'tengai/requests/ephemeris_request'
+require 'csv'
 
 module Tengai
   class Ephemeris
@@ -13,6 +14,10 @@ module Tengai
 
     def target_body
       @target_body ||= Tengai::Body.find(@client, target_body_id)
+    end
+
+    def ephemeris_table=(data)
+      @ephemeris_table = CSV.parse("#{ephemeris_columns}\n#{data}")
     end
 
     # Public: fetch an ephemeris table for a given body using the client
