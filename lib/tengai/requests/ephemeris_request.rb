@@ -75,30 +75,30 @@ module Tengai
     def receive_data(data)
       case data
       when DEFAULT_PROMPT
-        send_command('E')
+        send_command 'E'
       when TABLE_PROMPT
         send_command table
       when FIRST_OBSERVER_PROMPT
         send_command observer
       when SUBSEQUENT_OBSERVER_PROMPT
-        send_command('n')
+        send_command 'n'
       when CONFIRM_OBSERVER_PROMPT
-        send_command('y')
+        send_command 'y'
       when REFERNCE_PLANE_PROMPT
         send_command 'frame'
       when START_TIME_PROMPT
-        send_command(@start_time.strftime(TIME_FORMAT))
+        send_command @start_time.strftime(TIME_FORMAT)
       when END_TIME_PROMPT
-        send_command(@stop_time.strftime(TIME_FORMAT))
+        send_command @stop_time.strftime(TIME_FORMAT)
       when INTERVAL_PROMPT
-        send_command('1d')
+        send_command '1d'
       when ACCEPT_DEFAULT_OUTPUT_PROMPT
-        send_command('y')
+        send_command 'y'
       when SELECT_QUANTITIES_PROMPT
-        send_command('B')
+        send_command 'B'
       when COMPLETED_PROMPT
         @data = data
-        send_command('N')
+        send_command 'N'
       when Client::PROMPT
         @state = :ready
       else

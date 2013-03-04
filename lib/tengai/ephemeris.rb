@@ -8,7 +8,7 @@ module Tengai
     def initialize(client, data)
       @client = client
       @data = data
-      parse!
+      VectorEphemerisParser.parse(@data, self)
     end
 
     def target_body
@@ -30,11 +30,6 @@ module Tengai
         client, body.id, start_time: start_time, stop_time: stop_time)
 
       new(client, data)
-    end
-
-    private
-    def parse!
-      VectorEphemerisParser.parse(@data, self)
     end
   end
 end
