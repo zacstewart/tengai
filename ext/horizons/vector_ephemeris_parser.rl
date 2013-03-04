@@ -29,6 +29,10 @@
     ephemeris_table = data[mark..p].pack('c*')
   }
 
+  action ephemeris_columns {
+    ephemeris_columns = data[mark..p].pack('c*')
+  }
+
   ws = [ \t\r\n];
 
   adbc = ('A.D.'|'B.C.');
@@ -41,11 +45,9 @@
   tz = ('C'|'U') 'T';
   datetime = adbc ' ' year '-' month '-' date ' ' hours ':' minutes ':' seconds ' ' tz;
 
-  time_unit = ('minute' [s]? | 'calendar year' [s]?);
+  hr = '*'+ '\n';
 
-  soe = '$$SOE' '\n';
-  eoe = '$$EOE' '\n';
-  ephemeris_table = (alnum | ws | [*-./:])*;
+  time_unit = ('minute' [s]? | 'calendar year' [s]?);
 
   body_name = (alnum | space)*;
   body_id = digit*;
@@ -62,7 +64,14 @@
   stop_time  = 'Stop  time' ' '* ':' ' ' datetime >mark %stop_time space* '\n';
   step_size  = 'Step-size' ' '* ':' ' ' (digit+ ' '* time_unit) >mark $step_size '\n';
 
-  ephemeris = soe ephemeris_table >mark @ephemeris_table eoe;
+  ephemeris_columns = (
+    ('JDCT' | 'Date__(UT)__HR:MN')
+    (' ' | alpha | ',')*) >mark @ephemeris_columns '\n';
+
+  soe = '$$SOE' '\n';
+  eoe = '$$EOE' '\n';
+  ephemeris_table = any*;
+  ephemeris = soe any* >mark @ephemeris_table :> eoe;
 
   main := (
     any*
@@ -73,6 +82,9 @@
     stop_time
     step_size
     any*
+    hr
+    ephemeris_columns
+    hr
     ephemeris
     any*
   );
@@ -82,7 +94,7 @@
 
 require 'date'
 module Tengai
-  class EphemerisParser
+  class VectorEphemerisParser
     def self.parse(data, delegate)
       data = data.unpack('c*') if data.is_a? String
       eof = data.length
@@ -95,6 +107,7 @@ module Tengai
       delegate.start_time      = DateTime.parse(start_time)
       delegate.stop_time       = DateTime.parse(stop_time)
       delegate.step_size       = step_size
+      delegate.ephemeris_columns = ephemeris_columns
       delegate.ephemeris_table = ephemeris_table
     end
 

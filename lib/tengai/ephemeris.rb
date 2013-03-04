@@ -3,7 +3,7 @@ require 'tengai/requests/ephemeris_request'
 module Tengai
   class Ephemeris
     attr_accessor :data, :target_body_id, :center_body_id, :start_time,
-      :stop_time, :step_size, :ephemeris_table
+      :stop_time, :step_size, :ephemeris_columns, :ephemeris_table
 
     def initialize(client, data)
       @client = client
@@ -34,7 +34,7 @@ module Tengai
 
     private
     def parse!
-      EphemerisParser.parse(@data, self)
+      VectorEphemerisParser.parse(@data, self)
     end
   end
 end

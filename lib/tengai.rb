@@ -8,7 +8,7 @@ require 'tengai/client'
 require 'tengai/body'
 require 'tengai/ephemeris'
 
-require 'horizons/ephemeris_parser'
+require 'horizons/vector_ephemeris_parser'
 
 module Tengai
   class << self

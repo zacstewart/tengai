@@ -36,7 +36,7 @@ namespace :ragel do
   desc 'Compiles the Ragel state machine definitions to Ruby'
   task :compile do
     Rake::Task['ragel:clean'].invoke
-    target = 'ephemeris_parser'
+    target = 'vector_ephemeris_parser'
     puts "Compiling #{target}"
     sh "ragel -R ext/horizons/#{target}.rl"
     raise "Failed to compile #{target}" unless File.exists? "ext/horizons/#{target}.rb"

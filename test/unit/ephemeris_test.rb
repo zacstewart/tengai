@@ -16,7 +16,7 @@ class EphemerisTest < Test::Unit::TestCase
     @ephemeris_request.expects(:fetch).returns(Fixtures.ephemeris)
     EphemerisRequest.stubs(:new).returns(@ephemeris_request)
 
-    EphemerisParser.expects(:parse)
+    VectorEphemerisParser.expects(:parse)
     Ephemeris.fetch(mock, @body)
   end
 end
