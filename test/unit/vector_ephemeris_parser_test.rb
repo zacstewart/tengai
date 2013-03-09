@@ -12,22 +12,22 @@ class VectorEphemerisParserTest < Test::Unit::TestCase
 
   def test_center_body_id
     @ephemeris.expects(:center_body_id=).returns(399)
-    VectorEphemerisParser.parse(Fixtures.ephemeris, @ephemeris)
+    VectorEphemerisParser.parse(Fixtures.vector_ephemeris, @ephemeris)
   end
 
   def test_start_time
-    @ephemeris.expects(:start_time=).with(DateTime.parse('2012-12-28T00:01:00+00:00'))
-    VectorEphemerisParser.parse(Fixtures.ephemeris, @ephemeris)
+    @ephemeris.expects(:start_time=).with(DateTime.parse('1900-01-04T00:00:00+00:00'))
+    VectorEphemerisParser.parse(Fixtures.vector_ephemeris, @ephemeris)
   end
 
   def test_stop_time
-    @ephemeris.expects(:stop_time=).with(DateTime.parse('2012-12-29T00:01:00+00:00'))
-    VectorEphemerisParser.parse(Fixtures.ephemeris, @ephemeris)
+    @ephemeris.expects(:stop_time=).with(DateTime.parse('2100-01-03T00:00:00+00:00'))
+    VectorEphemerisParser.parse(Fixtures.vector_ephemeris, @ephemeris)
   end
 
   def test_step_size
-    @ephemeris.expects(:step_size=).with('1440 minutes')
-    VectorEphemerisParser.parse(Fixtures.ephemeris, @ephemeris)
+    @ephemeris.expects(:step_size=).with('100 calendar years')
+    VectorEphemerisParser.parse(Fixtures.vector_ephemeris, @ephemeris)
   end
 
   def test_ephemeris_table
