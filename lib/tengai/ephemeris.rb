@@ -4,7 +4,7 @@ require 'csv'
 module Tengai
   class Ephemeris
     attr_accessor :data, :target_body_id, :center_body_id, :start_time,
-      :stop_time, :step_size, :ephemeris_columns, :ephemeris_table
+      :stop_time, :step_size, :ephemeris_table
 
     def initialize(client, data)
       @client = client
@@ -16,8 +16,8 @@ module Tengai
       @target_body ||= Tengai::Body.find(@client, target_body_id)
     end
 
-    def ephemeris_table=(data)
-      @ephemeris_table = CSV.parse("#{ephemeris_columns}\n#{data}")
+    def ephemeris_table=(table)
+      @ephemeris_table = CSV.parse(table)
     end
 
     # Public: fetch an ephemeris table for a given body using the client
