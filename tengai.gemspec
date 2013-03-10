@@ -13,6 +13,8 @@ Gem::Specification.new do |s|
 
   s.require_paths = ['lib']
 
+  s.add_dependency 'virtus'
+
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'mocha'
