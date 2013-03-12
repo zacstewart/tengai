@@ -106,7 +106,8 @@ module Tengai
       delegate.start_time      = DateTime.parse(start_time)
       delegate.stop_time       = DateTime.parse(stop_time)
       delegate.step_size       = step_size
-      delegate.ephemeris_table = "#{ephemeris_columns}\n#{ephemeris_table}"
+      delegate.ephemeris_table = EphemerisTableParser.parse(
+        "#{ephemeris_columns}\n#{ephemeris_table}")
     end
 
     %% write data;

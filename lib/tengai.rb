@@ -9,6 +9,7 @@ require 'tengai/body'
 require 'tengai/ephemeris'
 
 require 'horizons/vector_ephemeris_parser'
+require 'tengai/parsers/ephemeris_table_parser'
 
 module Tengai
   class << self

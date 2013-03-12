@@ -184,11 +184,12 @@ when 7 then
       delegate.start_time      = DateTime.parse(start_time)
       delegate.stop_time       = DateTime.parse(stop_time)
       delegate.step_size       = step_size
-      delegate.ephemeris_table = "#{ephemeris_columns}\n#{ephemeris_table}"
+      delegate.ephemeris_table = EphemerisTableParser.parse(
+        "#{ephemeris_columns}\n#{ephemeris_table}")
     end
 
     
-# line 192 "ext/horizons/vector_ephemeris_parser.rb"
+# line 193 "ext/horizons/vector_ephemeris_parser.rb"
 class << self
 	attr_accessor :_ephemeris_parser_actions
 	private :_ephemeris_parser_actions, :_ephemeris_parser_actions=
@@ -4396,6 +4397,6 @@ end
 self.ephemeris_parser_en_main = 1;
 
 
-# line 113 "ext/horizons/vector_ephemeris_parser.rl"
+# line 114 "ext/horizons/vector_ephemeris_parser.rl"
   end
 end

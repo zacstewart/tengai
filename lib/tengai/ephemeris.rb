@@ -1,5 +1,5 @@
 require 'tengai/requests/ephemeris_request'
-require 'csv'
+require 'tengai/vector_ephemeris_table'
 
 module Tengai
   class Ephemeris
@@ -17,7 +17,7 @@ module Tengai
     end
 
     def ephemeris_table=(table)
-      @ephemeris_table = CSV.parse(table)
+      @ephemeris_table = VectorEphemerisTable.new_with_table(table)
     end
 
     # Public: fetch an ephemeris table for a given body using the client
