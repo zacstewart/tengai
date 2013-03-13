@@ -94,7 +94,7 @@
 require 'date'
 module Tengai
   class VectorEphemerisParser
-    def self.parse(data, delegate)
+    def self.parse(data, delegate, ephemeris_table_parser=EphemerisTableParser)
       data = data.unpack('c*') if data.is_a? String
       eof = data.length
 
@@ -106,7 +106,7 @@ module Tengai
       delegate.start_time      = DateTime.parse(start_time)
       delegate.stop_time       = DateTime.parse(stop_time)
       delegate.step_size       = step_size
-      delegate.ephemeris_table = EphemerisTableParser.parse(
+      delegate.ephemeris_table = ephemeris_table_parser.parse(
         "#{ephemeris_columns}\n#{ephemeris_table}")
     end
 
