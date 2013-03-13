@@ -1,5 +1,6 @@
 module Tengai
   class EphemerisRequest
+    SYSTEM_PROMPT = %r{Horizons>}.freeze
     DEFAULT_PROMPT = %r{<cr>:\s*$}
     TABLE_PROMPT = %r{Observe, Elements, Vectors  \[o,e,v,\?\] :\s*$}.freeze
     FIRST_OBSERVER_PROMPT = %r{Coordinate center \[ <id>,coord,geo  \] :\s*$}.freeze
@@ -26,7 +27,7 @@ module Tengai
       ACCEPT_DEFAULT_OUTPUT_PROMPT, SELECT_QUANTITIES_PROMPT, COMPLETED_PROMPT,
       OUTPUT_REFERENCE_FRAME_PROMPT, CORRECTIONS_PROMPT, OUTPUT_UNITS,
       CSV_FORMAT_PROMPT, LABEL_CARTESIAN_OUTPUT_PROMPT,
-      SELECT_OUTPUT_TABLE_TYPE_PROMPT, Client::PROMPT).freeze
+      SELECT_OUTPUT_TABLE_TYPE_PROMPT, SYSTEM_PROMPT).freeze
 
     TIME_FORMAT = '%Y-%b-%d %H:%M'.freeze
 
