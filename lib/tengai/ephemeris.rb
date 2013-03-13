@@ -1,3 +1,4 @@
+$:.unshift File.dirname(File.dirname(__FILE__))
 require 'tengai/requests/ephemeris_request'
 require 'tengai/vector_ephemeris_table'
 
