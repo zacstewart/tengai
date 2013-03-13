@@ -1,13 +1,17 @@
-require 'test_helper'
+require 'test/unit'
+require 'mocha/setup'
+require_relative '../../lib/tengai/body'
 
 class BodyTest < Test::Unit::TestCase
   def setup
     @client = mock
-    @mars  = Body.new(File.read('test/fixtures/bodies/499.txt'))
-    @earth = Body.new(File.read('test/fixtures/bodies/399.txt'))
-    @sun   = Body.new(File.read('test/fixtures/bodies/10.txt'))
-    @io    = Body.new(File.read('test/fixtures/bodies/501.txt'))
+    @mars  = Tengai::Body.new(File.read('test/fixtures/bodies/499.txt'))
+    @earth = Tengai::Body.new(File.read('test/fixtures/bodies/399.txt'))
+    @sun   = Tengai::Body.new(File.read('test/fixtures/bodies/10.txt'))
+    @io    = Tengai::Body.new(File.read('test/fixtures/bodies/501.txt'))
   end
+
+  # revised_on
 
   def test_mars_revised_on
     assert_equal @mars.revised_on, Date.new(2012, 9, 28)
@@ -25,6 +29,8 @@ class BodyTest < Test::Unit::TestCase
     assert_equal Date.new(2004, 1, 8), @io.revised_on
   end
 
+  # name
+
   def test_mars_name
     assert_equal 'Mars', @mars.name
   end
@@ -40,6 +46,8 @@ class BodyTest < Test::Unit::TestCase
   def test_io_name
     assert_equal 'Io  / (Jupiter)', @io.name
   end
+
+  # id
 
   def test_mars_id
     assert_equal 499, @mars.id
@@ -58,11 +66,18 @@ class BodyTest < Test::Unit::TestCase
   end
 
   def test_find
+    data_sheet = File.read('test/fixtures/bodies/499.txt')
+
     @client.expects(:cmd).
       with('String' => '499', 'Match' => /<cr>:\s*$/).
-      returns(File.read('test/fixtures/bodies/499.txt'))
+      returns(data_sheet)
+    Tengai::Body.expects(:new).with(data_sheet)
 
-    @body = Body.find(@client, '499')
-    assert_equal @mars, @body
+    @body = Tengai::Body.find(@client, '499')
+  end
+
+  def test_body_comparison
+    other_mars = Tengai::Body.new(File.read('test/fixtures/bodies/499.txt'))
+    assert_equal @mars, other_mars
   end
 end
