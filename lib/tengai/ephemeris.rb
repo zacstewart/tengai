@@ -31,8 +31,9 @@ module Tengai
     def self.fetch(client, body, options={})
       start_time = options[:start_time] || Date.today.to_time # defaults start at today
       stop_time = options[:stop_time] || (Date.today + 1).to_time # and end tomorrow
+      request = options[:request] || EphemerisRequest
 
-      data = EphemerisRequest.fetch(
+      data = request.fetch(
         client, body.id, start_time: start_time, stop_time: stop_time)
 
       new(client, data)
