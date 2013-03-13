@@ -1,4 +1,6 @@
-require 'test_helper'
+require 'test/unit'
+require 'mocha/setup'
+require_relative '../../lib/tengai/vector_ephemeris_table'
 
 class VectorEphemerisTableTest < Test::Unit::TestCase
   def setup
