@@ -94,20 +94,20 @@
 require 'date'
 module Tengai
   class VectorEphemerisParser
-    def self.parse(data, delegate, ephemeris_table_parser=EphemerisTableParser)
+    def self.parse(data, ephemeris_table_parser=EphemerisTableParser)
       data = data.unpack('c*') if data.is_a? String
       eof = data.length
 
       %% write init;
       %% write exec;
 
-      delegate.target_body_id  = target_body_id.to_i
-      delegate.center_body_id  = center_body_id.to_i
-      delegate.start_time      = DateTime.parse(start_time)
-      delegate.stop_time       = DateTime.parse(stop_time)
-      delegate.step_size       = step_size
-      delegate.ephemeris_table = ephemeris_table_parser.parse(
-        "#{ephemeris_columns}\n#{ephemeris_table}")
+      { target_body_id: target_body_id.to_i,
+        center_body_id: center_body_id.to_i,
+        start_time: DateTime.parse(start_time),
+        stop_time: DateTime.parse(stop_time),
+        step_size: step_size,
+        ephemeris_table: ephemeris_table_parser.parse(
+          "#{ephemeris_columns}\n#{ephemeris_table}") }
     end
 
     %% write data;

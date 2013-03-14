@@ -4,34 +4,29 @@ require_relative '../../ext/horizons/vector_ephemeris_parser'
 
 class VectorEphemerisParserTest < Test::Unit::TestCase
   def setup
-    @ephemeris = stub_everything
     @table_parser = stub('EphemerisTableParser', parse: nil)
     @data_sheet = File.read('test/fixtures/ephemerides/mars_vectors_from_solar_system_center.txt')
+    @parsed_data = Tengai::VectorEphemerisParser.parse(@data_sheet, @table_parser)
   end
 
   def test_target_body_id
-    @ephemeris.expects(:target_body_id=).with(499)
-    Tengai::VectorEphemerisParser.parse(@data_sheet, @ephemeris, @table_parser)
+    assert_equal 499, @parsed_data[:target_body_id]
   end
 
   def test_center_body_id
-    @ephemeris.expects(:center_body_id=).returns(399)
-    Tengai::VectorEphemerisParser.parse(@data_sheet, @ephemeris, @table_parser)
+    assert_equal 0, @parsed_data[:center_body_id]
   end
 
   def test_start_time
-    @ephemeris.expects(:start_time=).with(DateTime.parse('1900-01-04T00:00:00+00:00'))
-    Tengai::VectorEphemerisParser.parse(@data_sheet, @ephemeris, @table_parser)
+    assert_equal DateTime.parse('1900-01-04T00:00:00+00:00'), @parsed_data[:start_time]
   end
 
   def test_stop_time
-    @ephemeris.expects(:stop_time=).with(DateTime.parse('2100-01-03T00:00:00+00:00'))
-    Tengai::VectorEphemerisParser.parse(@data_sheet, @ephemeris, @table_parser)
+    assert_equal DateTime.parse('2100-01-03T00:00:00+00:00'), @parsed_data[:stop_time]
   end
 
   def test_step_size
-    @ephemeris.expects(:step_size=).with('100 calendar years')
-    Tengai::VectorEphemerisParser.parse(@data_sheet, @ephemeris, @table_parser)
+    assert_equal '100 calendar years', @parsed_data[:step_size]
   end
 
   def test_ephemeris_table
@@ -46,7 +41,7 @@ JDCT ,   , X, Y, Z, VX, VY, VZ, LT, RG, RR,
       {:jdct => '2451547.500000000', :x => '1.384794374160415E+00', :y => '3.326800792581258E-02', :z => '-2.208505372473301E-02', :vx => '2.951762409660592E-04', :vy => '1.380219433765170E-02', :vz => '6.322854911310298E-03', :lt => '8.001229688088482E-03', :rg => '1.385369975369652E+00', :rr => '5.257002324522832E-04'}]
 
     @table_parser.expects(:parse).with(table).returns(hashes)
-    @ephemeris.expects(:ephemeris_table=).with(hashes)
-    Tengai::VectorEphemerisParser.parse(@data_sheet, @ephemeris, @table_parser)
+    parsed_data = Tengai::VectorEphemerisParser.parse(@data_sheet, @table_parser)
+    assert_equal hashes, parsed_data[:ephemeris_table]
   end
 end

@@ -4,13 +4,18 @@ require 'tengai/vector_ephemeris_table'
 
 module Tengai
   class Ephemeris
-    attr_accessor :data, :target_body_id, :center_body_id, :start_time,
-      :stop_time, :step_size, :ephemeris_table
+    include Virtus
+    attribute :data, String
+    attribute :target_body_id, Integer
+    attribute :center_body_id, Integer
+    attribute :start_time, DateTime
+    attribute :stop_time, DateTime
+    attribute :step_size, Integer
+    attribute :ephemeris_table, VectorEphemerisTable
 
     def initialize(client, data)
+      super(data)
       @client = client
-      @data = data
-      VectorEphemerisParser.parse(@data, self)
     end
 
     def target_body
@@ -32,9 +37,11 @@ module Tengai
       start_time = options[:start_time] || Date.today.to_time # defaults start at today
       stop_time = options[:stop_time] || (Date.today + 1).to_time # and end tomorrow
       request = options[:request] || EphemerisRequest
+      parser = options[:parser] || VectorEphemerisParser
 
       data = request.fetch(
         client, body.id, start_time: start_time, stop_time: stop_time)
+      data = parser.parse(data)
 
       new(client, data)
     end
