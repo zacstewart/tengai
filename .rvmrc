@@ -1,1 +1,1 @@
-rvm 1.9.3@tengai
+rvm --create 1.9.3@tengai
