@@ -9,8 +9,7 @@ class VectorEphemerisTable
   end
 
   def self.new_with_table(rows)
-    rows.map {|row| Row.new(row) }
-    new(rows)
+    new(rows.map(&Row.method(:new)))
   end
 
   def each(&block)

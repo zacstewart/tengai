@@ -11,7 +11,8 @@ JDCT ,   , X, Y, Z, VX, VY, VZ, LT, RG, RR,
   end
 
   def test_new_with_table
-    row = {
+    row = mock('Row')
+    hash = {
       jdct: '2415023.500000000',
       x: '4.798942014821934E-01',
       y: '-1.203536629131559E+00',
@@ -22,7 +23,8 @@ JDCT ,   , X, Y, Z, VX, VY, VZ, LT, RG, RR,
       lt: '8.164317509179321E-03',
       rg: '1.413607756247767E+00',
       rr: '-8.900751447771002E-04'}
-    VectorEphemerisTable::Row.expects(:new).with(row)
-    VectorEphemerisTable.new_with_table([row])
+    VectorEphemerisTable::Row.expects(:new).with(hash).returns(row)
+    VectorEphemerisTable.expects(:new).with([row])
+    VectorEphemerisTable.new_with_table([hash])
   end
 end
