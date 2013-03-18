@@ -26,7 +26,7 @@
   }
 
   action ephemeris_table {
-    ephemeris_table = data[mark..p].pack('c*')
+    ephemeris_table = data[mark..p - 1].pack('c*')
   }
 
   action ephemeris_columns {
@@ -70,7 +70,7 @@
   soe = '$$SOE' '\n';
   eoe = '$$EOE' '\n';
   ephemeris_table = any*;
-  ephemeris = soe any* >mark @ephemeris_table :> eoe;
+  ephemeris = soe any* >mark %ephemeris_table :> eoe;
 
   main := (
     any*
