@@ -18,7 +18,7 @@ class VectorEphemerisTable
 
   class Row
     include Virtus
-    attribute :jdct, Date
+    attribute :jdct, DateTime
     attribute :x, Float
     attribute :y, Float
     attribute :z, Float
