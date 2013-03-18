@@ -36,11 +36,15 @@ module Tengai
     def self.fetch(client, body, options={})
       start_time = options[:start_time] || Date.today.to_time # defaults start at today
       stop_time = options[:stop_time] || (Date.today + 1).to_time # and end tomorrow
+      interval = options[:interval] || 1440
       request = options[:request] || EphemerisRequest
       parser = options[:parser] || VectorEphemerisParser
 
       data = request.fetch(
-        client, body.id, start_time: start_time, stop_time: stop_time)
+        client, body.id,
+        start_time: start_time,
+        stop_time: stop_time,
+        interval: interval)
       data = parser.parse(data)
 
       new(client, data)

@@ -36,6 +36,7 @@ module Tengai
       @body = body.to_s
       @start_time = options[:start_time]
       @stop_time = options[:stop_time]
+      @interval = options[:interval] || 1440
       @options = options
       @state = :ready
     end
@@ -100,7 +101,7 @@ module Tengai
       when END_TIME_PROMPT
         send_command @stop_time.strftime(TIME_FORMAT)
       when INTERVAL_PROMPT
-        send_command '1d'
+        send_command @interval.to_s + 'm'
       when ACCEPT_DEFAULT_OUTPUT_PROMPT
         send_command 'n'
       when OUTPUT_REFERENCE_FRAME_PROMPT
