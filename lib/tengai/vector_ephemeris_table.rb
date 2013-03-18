@@ -30,7 +30,7 @@ class VectorEphemerisTable
     attribute :rr, Float
 
     def jdct=(julian)
-      super Date.jd(julian.to_f)
+      super DateTime.jd(julian.to_f)
     end
   end
 end
