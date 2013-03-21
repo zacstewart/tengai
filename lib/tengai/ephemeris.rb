@@ -32,6 +32,7 @@ module Tengai
     # options - A Hash of options for refining the ephemeris table
     #           :start_time - The Time beginning of the ephemeris
     #           :stop_time - The Time end of the ephemeris
+    #           :interval - The resolution of the table in minutes
     def self.fetch(client, body, options={})
       start_time = options[:start_time] || Date.today.to_time # defaults start at today
       stop_time = options[:stop_time] || (Date.today + 1).to_time # and end tomorrow
