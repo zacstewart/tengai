@@ -5,7 +5,6 @@ require 'tengai/vector_ephemeris_table'
 module Tengai
   class Ephemeris
     include Virtus
-    attribute :data, String
     attribute :target_body_id, Integer
     attribute :center_body_id, Integer
     attribute :start_time, DateTime
