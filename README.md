@@ -21,7 +21,7 @@ irregularly structured, and as such parsing it is a big deal.
 client = Tengai::Client.new # Connect a client to the telnet server
 body = Tengai::Body.find(client, 499) # Get Mars
 ephemeris = Tengai::Ephemeris.fetch(client, body,
-  start_time: Date.today - 368, stop_time: Date.today) # Get ephemeris data for mars
+  start_time: Date.today, stop_time: Date.today + 1, interval: 720) # Get ephemeris data for mars
 ```
 
 ## Contributing :octocat:
