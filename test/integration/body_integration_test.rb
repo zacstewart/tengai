@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'fixtures'
 
 class BodyIntegrationTest < Test::Unit::TestCase
   def setup
