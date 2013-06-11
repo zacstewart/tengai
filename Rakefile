@@ -4,10 +4,7 @@ require 'rake/testtask'
 task default: :test
 
 desc 'Run all tests'
-task :test do
-  Rake::Task['test:units'].invoke
-  Rake::Task['test:integration'].invoke
-end
+multitask test: ['test:units', 'test:integration']
 
 namespace :test do
   desc 'Run all tests together (for coverage)'
