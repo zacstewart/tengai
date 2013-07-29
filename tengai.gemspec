@@ -23,11 +23,14 @@ Gem::Specification.new do |s|
 
   s.files = %w(
     .gitignore
-    .rvmrc
+    .ruby-gemset
+    .ruby-version
     .travis.yml
     Gemfile
     README.md
     Rakefile
+    ext/horizons/body_data_sheet_parser.rb
+    ext/horizons/body_data_sheet_parser.rl
     ext/horizons/vector_ephemeris_parser.rb
     ext/horizons/vector_ephemeris_parser.rl
     lib/tengai.rb
@@ -39,6 +42,7 @@ Gem::Specification.new do |s|
     lib/tengai/vector_ephemeris_table.rb
     lib/tengai/version.rb
     tengai.gemspec
+    test/fixtures.rb
     test/fixtures/bodies/10.txt
     test/fixtures/bodies/399.txt
     test/fixtures/bodies/499.txt
@@ -49,6 +53,7 @@ Gem::Specification.new do |s|
     test/integration/body_integration_test.rb
     test/integration/ephemeris_integration_test.rb
     test/test_helper.rb
+    test/unit/body_data_sheet_parser_test.rb
     test/unit/body_test.rb
     test/unit/ephemeris_table_parser_test.rb
     test/unit/ephemeris_test.rb
