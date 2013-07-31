@@ -31,14 +31,16 @@ module Tengai
 
     TIME_FORMAT = '%Y-%b-%d %H:%M'.freeze
 
+    SOLAR_SYSTEM_BARYCENTER = '500@0'.freeze
+
     def initialize(client, body, options={})
-      @client = client
-      @body = body.to_s
-      @start_time = options[:start_time]
-      @stop_time = options[:stop_time]
-      @interval = options[:interval] || 1440
-      @options = options
-      @state = :ready
+      @client     = client
+      @body       = body.to_s
+      @start_time = options.fetch(:start_time)
+      @stop_time  = options.fetch(:stop_time)
+      @interval   = options.fetch(:interval) { 1440 }
+      @options    = options
+      @state      = :ready
     end
 
     def self.fetch(client, body, options={})
@@ -71,7 +73,7 @@ module Tengai
     end
 
     def observer
-      @options[:observer] || '500@0'
+      @options.fetch(:observer) { SOLAR_SYSTEM_BARYCENTER }
     end
 
     def send_command(command, prompt=ANY_PROMPT)
