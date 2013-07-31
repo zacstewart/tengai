@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Ruby wrapper for the NASA HORIZONS telnet system'
   s.description = 'Ruby wrapper for the NASA HORIZONS telnet system'
   s.homepage    = 'http://github.com/zacstewart/tengai'
+  s.license     = 'MIT'
   s.authors     = ['Zac Stewart']
   s.email       = ['zgstewart@gmail.com']
 
