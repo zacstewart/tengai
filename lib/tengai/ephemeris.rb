@@ -1,5 +1,5 @@
 $:.unshift File.dirname(File.dirname(__FILE__))
-require 'tengai/requests/ephemeris_request'
+require 'tengai/requests/telnet_ephemeris_request'
 require 'tengai/vector_ephemeris_table'
 require 'virtus'
 
@@ -40,8 +40,8 @@ module Tengai
       interval = options[:interval] || 1440
 
       # Inject dependencies
-      request = options[:request] || EphemerisRequest
       parser = options[:parser] || VectorEphemerisParser
+      request = options[:request] || TelnetEphemerisRequest
 
       data = request.fetch(
         client, body.id,

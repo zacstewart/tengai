@@ -8,9 +8,9 @@ class EphemerisTest < Test::Unit::TestCase
     body = mock('Body', id: 499)
     data_sheet = File.read('test/fixtures/ephemerides/mars_vectors_from_solar_system_center.txt')
     data_hash = mock('Hash')
-    request_factory = mock('EphemerisRequest')
     vector_ephemeris_parser = mock('VectorEphemerisParser')
     options = {request: request_factory, parser: vector_ephemeris_parser}
+    request_factory = mock('TelnetEphemerisRequest')
 
     request_factory.expects(:fetch).returns(data_sheet)
     vector_ephemeris_parser.expects(:parse).with(data_sheet).returns(data_hash)

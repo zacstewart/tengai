@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
     lib/tengai/client.rb
     lib/tengai/ephemeris.rb
     lib/tengai/parsers/ephemeris_table_parser.rb
-    lib/tengai/requests/ephemeris_request.rb
+    lib/tengai/requests/telnet_ephemeris_request.rb
     lib/tengai/vector_ephemeris_table.rb
     lib/tengai/version.rb
     tengai.gemspec

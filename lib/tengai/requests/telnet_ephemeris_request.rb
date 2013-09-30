@@ -1,5 +1,5 @@
 module Tengai
-  class EphemerisRequest
+  class TelnetEphemerisRequest
     SYSTEM_PROMPT = %r{Horizons>}.freeze
     DEFAULT_PROMPT = %r{<cr>:\s*$}
     TABLE_PROMPT = %r{Observe, Elements, Vectors  \[o,e,v,\?\] :\s*$}.freeze
