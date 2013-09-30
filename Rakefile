@@ -1,33 +1,10 @@
 STDOUT.sync = true
 require 'rake/testtask'
+require 'rspec/core/rake_task'
 
-task default: :test
+task default: :spec
 
-desc 'Run all tests'
-multitask test: ['test:units', 'test:integration']
-
-namespace :test do
-  desc 'Run all tests together (for coverage)'
-  Rake::TestTask.new(:all) do |t|
-    t.libs << 'test'
-    t.test_files = FileList['test/**/*_test.rb']
-    t.verbose = true
-  end
-
-  desc 'Run unit tests'
-  Rake::TestTask.new(:units) do |t|
-    t.libs << 'test'
-    t.test_files = FileList['test/unit/**/*_test.rb']
-    t.verbose = true
-  end
-
-  desc 'Run integration tests'
-  Rake::TestTask.new(:integration) do |t|
-    t.libs << 'test'
-    t.test_files = FileList['test/integration/**/*_test.rb']
-    t.verbose = true
-  end
-end
+RSpec::Core::RakeTask.new(:spec)
 
 namespace :ragel do
   targets = %w(vector_ephemeris_parser body_data_sheet_parser)

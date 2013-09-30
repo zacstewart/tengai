@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rake'
+  s.add_development_dependency 'rspec'
   s.add_development_dependency 'mocha'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'forgery'
@@ -28,6 +29,7 @@ Gem::Specification.new do |s|
     .ruby-version
     .travis.yml
     Gemfile
+    LICENSE.txt
     README.md
     Rakefile
     ext/horizons/body_data_sheet_parser.rb
