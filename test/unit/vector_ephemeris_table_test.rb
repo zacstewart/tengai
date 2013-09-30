@@ -23,8 +23,8 @@ JDCT ,   , X, Y, Z, VX, VY, VZ, LT, RG, RR,
       lt: '8.164317509179321E-03',
       rg: '1.413607756247767E+00',
       rr: '-8.900751447771002E-04'}
-    VectorEphemerisTable::Row.expects(:new).with(hash).returns(row)
-    VectorEphemerisTable.expects(:new).with([row])
-    VectorEphemerisTable.new_with_table([hash])
+    Tengai::VectorEphemerisTable::Row.expects(:new).with(hash).returns(row)
+    Tengai::VectorEphemerisTable.expects(:new).with([row])
+    Tengai::VectorEphemerisTable.new_with_table([hash])
   end
 end
