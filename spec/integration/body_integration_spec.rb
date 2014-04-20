@@ -6,7 +6,7 @@ describe Body do
 
     context 'finding mars' do
       subject { Body.find(client, 499) }
-      let(:body) { Body.new(BodyDataSheetParser.parse(Fixtures.mars)) }
+      let(:body) { BodyDataSheetParser.parse(Fixtures.mars, Body.new) }
 
       its(:id) { should eq(499) }
       its(:name) { should eq('Mars') }
@@ -18,7 +18,7 @@ describe Body do
 
     context 'finding earth' do
       subject { Body.find(client, 399) }
-      let(:body) { Body.new(BodyDataSheetParser.parse(Fixtures.earth)) }
+      let(:body) { BodyDataSheetParser.parse(Fixtures.earth, Body.new) }
 
       its(:id) { should eq(399) }
       its(:name) { should eq('Earth') }
