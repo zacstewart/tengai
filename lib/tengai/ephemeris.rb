@@ -1,21 +1,20 @@
 $:.unshift File.dirname(File.dirname(__FILE__))
 require 'tengai/requests/telnet_ephemeris_request'
 require 'tengai/vector_ephemeris_table'
-require 'virtus'
 
 module Tengai
   class Ephemeris
-    include Virtus
-    attribute :target_body_id, Integer
-    attribute :center_body_id, Integer
-    attribute :start_time, DateTime
-    attribute :stop_time, DateTime
-    attribute :step_size, Integer
-    attribute :ephemeris_table, VectorEphemerisTable
+    attr_accessor :target_body_id, :center_body_id, :start_time, :stop_time,
+      :step_size, :ephemeris_table
 
     def initialize(client, data)
-      super(data)
       @client = client
+      self.target_body_id = data.fetch(:target_body_id)
+      self.center_body_id = data.fetch(:center_body_id)
+      self.start_time = data.fetch(:start_time)
+      self.stop_time = data.fetch(:stop_time)
+      self.step_size = data.fetch(:step_size)
+      self.ephemeris_table = data.fetch(:ephemeris_table)
     end
 
     def target_body
