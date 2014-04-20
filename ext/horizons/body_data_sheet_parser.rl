@@ -5,15 +5,15 @@
   action mark { mark = p }
 
   action revised_on {
-    _revised_on = data[mark..p].pack('c*')
+    @body.revised_on = Date.parse(data[mark..p].pack('c*'))
   }
 
   action name {
-    _name = data[mark..p - 1].pack('c*')
+    @body.name = data[mark..p - 1].pack('c*')
   }
 
   action id {
-    _id = data[mark..p].pack('c*')
+    @body.id = Integer(data[mark..p].pack('c*'))
   }
 
   date = upper lower{2} ' ' digit{2} ',' ' ' digit{4};
@@ -35,18 +35,23 @@ require 'date'
 
 module Tengai
   class BodyDataSheetParser
-    def self.parse(data)
-      data = data.unpack('c*') if data.is_a? String
-      eof = data.length
+    attr_reader :data, :eof
 
-      %% write init;
-      %% write exec;
-
-      { revised_on:  Date.parse(_revised_on),
-        name:        _name,
-        id:          _id.to_i }
+    def initialize(data, body)
+      @data = data.unpack('c*') if data.is_a? String
+      @eof = @data.length
+      @body = body
     end
 
-    %% write data;
+    def parse
+      %% write data;
+      %% write init;
+      %% write exec;
+      @body
+    end
+
+    def self.parse(data, body = Tengai::Body.new)
+      new(data, body).parse
+    end
   end
 end

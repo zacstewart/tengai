@@ -9,159 +9,17 @@ require 'date'
 
 module Tengai
   class BodyDataSheetParser
-    def self.parse(data)
-      data = data.unpack('c*') if data.is_a? String
-      eof = data.length
+    attr_reader :data, :eof
 
-      
-# line 18 "ext/horizons/body_data_sheet_parser.rb"
-begin
-	p ||= 0
-	pe ||= data.length
-	cs = body_data_sheet_parser_start
-end
-
-# line 43 "ext/horizons/body_data_sheet_parser.rl"
-      
-# line 27 "ext/horizons/body_data_sheet_parser.rb"
-begin
-	_klen, _trans, _keys, _acts, _nacts = nil
-	_goto_level = 0
-	_resume = 10
-	_eof_trans = 15
-	_again = 20
-	_test_eof = 30
-	_out = 40
-	while true
-	_trigger_goto = false
-	if _goto_level <= 0
-	if p == pe
-		_goto_level = _test_eof
-		next
-	end
-	if cs == 0
-		_goto_level = _out
-		next
-	end
-	end
-	if _goto_level <= _resume
-	_keys = _body_data_sheet_parser_key_offsets[cs]
-	_trans = _body_data_sheet_parser_index_offsets[cs]
-	_klen = _body_data_sheet_parser_single_lengths[cs]
-	_break_match = false
-	
-	begin
-	  if _klen > 0
-	     _lower = _keys
-	     _upper = _keys + _klen - 1
-
-	     loop do
-	        break if _upper < _lower
-	        _mid = _lower + ( (_upper - _lower) >> 1 )
-
-	        if data[p].ord < _body_data_sheet_parser_trans_keys[_mid]
-	           _upper = _mid - 1
-	        elsif data[p].ord > _body_data_sheet_parser_trans_keys[_mid]
-	           _lower = _mid + 1
-	        else
-	           _trans += (_mid - _keys)
-	           _break_match = true
-	           break
-	        end
-	     end # loop
-	     break if _break_match
-	     _keys += _klen
-	     _trans += _klen
-	  end
-	  _klen = _body_data_sheet_parser_range_lengths[cs]
-	  if _klen > 0
-	     _lower = _keys
-	     _upper = _keys + (_klen << 1) - 2
-	     loop do
-	        break if _upper < _lower
-	        _mid = _lower + (((_upper-_lower) >> 1) & ~1)
-	        if data[p].ord < _body_data_sheet_parser_trans_keys[_mid]
-	          _upper = _mid - 2
-	        elsif data[p].ord > _body_data_sheet_parser_trans_keys[_mid+1]
-	          _lower = _mid + 2
-	        else
-	          _trans += ((_mid - _keys) >> 1)
-	          _break_match = true
-	          break
-	        end
-	     end # loop
-	     break if _break_match
-	     _trans += _klen
-	  end
-	end while false
-	_trans = _body_data_sheet_parser_indicies[_trans]
-	cs = _body_data_sheet_parser_trans_targs[_trans]
-	if _body_data_sheet_parser_trans_actions[_trans] != 0
-		_acts = _body_data_sheet_parser_trans_actions[_trans]
-		_nacts = _body_data_sheet_parser_actions[_acts]
-		_acts += 1
-		while _nacts > 0
-			_nacts -= 1
-			_acts += 1
-			case _body_data_sheet_parser_actions[_acts - 1]
-when 0 then
-# line 5 "ext/horizons/body_data_sheet_parser.rl"
-		begin
- mark = p 		end
-when 1 then
-# line 7 "ext/horizons/body_data_sheet_parser.rl"
-		begin
-
-    _revised_on = data[mark..p].pack('c*')
-  		end
-when 2 then
-# line 11 "ext/horizons/body_data_sheet_parser.rl"
-		begin
-
-    _name = data[mark..p - 1].pack('c*')
-  		end
-when 3 then
-# line 15 "ext/horizons/body_data_sheet_parser.rl"
-		begin
-
-    _id = data[mark..p].pack('c*')
-  		end
-# line 130 "ext/horizons/body_data_sheet_parser.rb"
-			end # action switch
-		end
-	end
-	if _trigger_goto
-		next
-	end
-	end
-	if _goto_level <= _again
-	if cs == 0
-		_goto_level = _out
-		next
-	end
-	p += 1
-	if p != pe
-		_goto_level = _resume
-		next
-	end
-	end
-	if _goto_level <= _test_eof
-	end
-	if _goto_level <= _out
-		break
-	end
-	end
-	end
-
-# line 44 "ext/horizons/body_data_sheet_parser.rl"
-
-      { revised_on:  Date.parse(_revised_on),
-        name:        _name,
-        id:          _id.to_i }
+    def initialize(data, body)
+      @data = data.unpack('c*') if data.is_a? String
+      @eof = @data.length
+      @body = body
     end
 
-    
-# line 165 "ext/horizons/body_data_sheet_parser.rb"
+    def parse
+      
+# line 23 "ext/horizons/body_data_sheet_parser.rb"
 class << self
 	attr_accessor :_body_data_sheet_parser_actions
 	private :_body_data_sheet_parser_actions, :_body_data_sheet_parser_actions=
@@ -345,6 +203,153 @@ end
 self.body_data_sheet_parser_en_main = 1;
 
 
-# line 51 "ext/horizons/body_data_sheet_parser.rl"
+# line 48 "ext/horizons/body_data_sheet_parser.rl"
+      
+# line 209 "ext/horizons/body_data_sheet_parser.rb"
+begin
+	p ||= 0
+	pe ||= data.length
+	cs = body_data_sheet_parser_start
+end
+
+# line 49 "ext/horizons/body_data_sheet_parser.rl"
+      
+# line 218 "ext/horizons/body_data_sheet_parser.rb"
+begin
+	_klen, _trans, _keys, _acts, _nacts = nil
+	_goto_level = 0
+	_resume = 10
+	_eof_trans = 15
+	_again = 20
+	_test_eof = 30
+	_out = 40
+	while true
+	_trigger_goto = false
+	if _goto_level <= 0
+	if p == pe
+		_goto_level = _test_eof
+		next
+	end
+	if cs == 0
+		_goto_level = _out
+		next
+	end
+	end
+	if _goto_level <= _resume
+	_keys = _body_data_sheet_parser_key_offsets[cs]
+	_trans = _body_data_sheet_parser_index_offsets[cs]
+	_klen = _body_data_sheet_parser_single_lengths[cs]
+	_break_match = false
+	
+	begin
+	  if _klen > 0
+	     _lower = _keys
+	     _upper = _keys + _klen - 1
+
+	     loop do
+	        break if _upper < _lower
+	        _mid = _lower + ( (_upper - _lower) >> 1 )
+
+	        if data[p].ord < _body_data_sheet_parser_trans_keys[_mid]
+	           _upper = _mid - 1
+	        elsif data[p].ord > _body_data_sheet_parser_trans_keys[_mid]
+	           _lower = _mid + 1
+	        else
+	           _trans += (_mid - _keys)
+	           _break_match = true
+	           break
+	        end
+	     end # loop
+	     break if _break_match
+	     _keys += _klen
+	     _trans += _klen
+	  end
+	  _klen = _body_data_sheet_parser_range_lengths[cs]
+	  if _klen > 0
+	     _lower = _keys
+	     _upper = _keys + (_klen << 1) - 2
+	     loop do
+	        break if _upper < _lower
+	        _mid = _lower + (((_upper-_lower) >> 1) & ~1)
+	        if data[p].ord < _body_data_sheet_parser_trans_keys[_mid]
+	          _upper = _mid - 2
+	        elsif data[p].ord > _body_data_sheet_parser_trans_keys[_mid+1]
+	          _lower = _mid + 2
+	        else
+	          _trans += ((_mid - _keys) >> 1)
+	          _break_match = true
+	          break
+	        end
+	     end # loop
+	     break if _break_match
+	     _trans += _klen
+	  end
+	end while false
+	_trans = _body_data_sheet_parser_indicies[_trans]
+	cs = _body_data_sheet_parser_trans_targs[_trans]
+	if _body_data_sheet_parser_trans_actions[_trans] != 0
+		_acts = _body_data_sheet_parser_trans_actions[_trans]
+		_nacts = _body_data_sheet_parser_actions[_acts]
+		_acts += 1
+		while _nacts > 0
+			_nacts -= 1
+			_acts += 1
+			case _body_data_sheet_parser_actions[_acts - 1]
+when 0 then
+# line 5 "ext/horizons/body_data_sheet_parser.rl"
+		begin
+ mark = p 		end
+when 1 then
+# line 7 "ext/horizons/body_data_sheet_parser.rl"
+		begin
+
+    @body.revised_on = Date.parse(data[mark..p].pack('c*'))
+  		end
+when 2 then
+# line 11 "ext/horizons/body_data_sheet_parser.rl"
+		begin
+
+    @body.name = data[mark..p - 1].pack('c*')
+  		end
+when 3 then
+# line 15 "ext/horizons/body_data_sheet_parser.rl"
+		begin
+
+    @body.id = Integer(data[mark..p].pack('c*'))
+  		end
+# line 321 "ext/horizons/body_data_sheet_parser.rb"
+			end # action switch
+		end
+	end
+	if _trigger_goto
+		next
+	end
+	end
+	if _goto_level <= _again
+	if cs == 0
+		_goto_level = _out
+		next
+	end
+	p += 1
+	if p != pe
+		_goto_level = _resume
+		next
+	end
+	end
+	if _goto_level <= _test_eof
+	end
+	if _goto_level <= _out
+		break
+	end
+	end
+	end
+
+# line 50 "ext/horizons/body_data_sheet_parser.rl"
+      @body
+    end
+
+    def self.parse(data, body = Tengai::Body.new)
+      new(data, body).parse
+    end
   end
 end
