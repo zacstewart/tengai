@@ -6,9 +6,20 @@ describe Tengai::Body do
 
   let(:mars_data) { Fixtures.mars }
 
+  let(:parsed_data) { {
+    revised_on: 'Sep 28, 2012',
+    name: 'Mars',
+    id: '499'
+  } }
+
   let(:parser) { double('Parser', parse: nil) }
 
   describe '#find' do
+    before do
+      allow(client).to receive(:cmd).and_return(mars_data)
+      allow(parser).to receive(:parse).and_return(parsed_data)
+    end
+
     it 'sends to body id as a telnet command' do
       expect(client).to receive(:cmd).
         with('String' => '499', 'Match' => /<cr>:\s*$/).
@@ -17,8 +28,16 @@ describe Tengai::Body do
     end
 
     it 'parses the data received from the client' do
-      expect(parser).to receive(:parse).with(mars_data)
+      expect(parser).to receive(:parse).with(mars_data).and_return(parsed_data)
       described_class.find(client, 499, parser)
+    end
+
+    it 'creates a new Body using the parsed data' do
+      body = described_class.find(client, 499, parser)
+      expect(body).to be_a(Tengai::Body)
+      expect(body.revised_on).to eq(Date.new(2012, 9, 28))
+      expect(body.name).to eq('Mars')
+      expect(body.id).to eq(499)
     end
   end
 
